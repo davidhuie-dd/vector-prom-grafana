@@ -10,8 +10,21 @@ scrape_interval_secs = 15
 type = "datadog_agent"
 address = "0.0.0.0:9000"
 
+[sources.http]
+type = "http_server"
+address = "0.0.0.0:7000"
+encoding = "text"
+
 [sinks.prom]
 type = "prometheus_exporter"
 inputs = ["host", "internal", "datadog"]
 address = "0.0.0.0:8000"
 default_namespace = "service"
+
+[sinks.loki]
+type = "loki"
+inputs = ["http", "datadog"]
+endpoint = "http://loki:3100"
+labels = { source = "vector" }
+  [sinks.loki.encoding]
+  codec = "json"

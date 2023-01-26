@@ -9,8 +9,11 @@ services:
       - 8000:8000
       # Datadog agent
       - 9000:9000
+      # HTTP server
+      - 7000:7000
     depends_on:
       - prom
+      - loki
   prom:
     image: prom/prometheus:latest
     volumes:
@@ -26,8 +29,18 @@ services:
       - prom
     volumes:
       - grafana-storage:/var/lib/grafana
+  loki:
+    image: grafana/loki:latest
+    volumes:
+      - loki-storage:/var/log
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+
 volumes:
   grafana-storage:
     driver: local
   prom-storage:
+    driver: local
+  loki-storage:
     driver: local
