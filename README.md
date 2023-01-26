@@ -21,6 +21,7 @@ $ docker-compose up
 
 # Configuring Grafana
 
-1. Head to `localhost:3000`
-1. Add the prometheus data source using the endpoint: `prom:9090`
+1. Head to `localhost:3000` (default username: `admin`, pw: `admin`)
+1. Add the prometheus data source using the URL: `http://prom:9090`
+1. Click `Save and Test`.
 1. Enjoy!
