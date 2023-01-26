@@ -26,8 +26,6 @@ services:
       - prom
     volumes:
       - grafana-storage:/var/lib/grafana
-    # environment:
-    #   # GF_INSTALL_PLUGINS: grafana-piechart-panel
 volumes:
   grafana-storage:
     driver: local
